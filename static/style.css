@@ -1,0 +1,140 @@
+body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(120deg, #bbdefb, #c8e6c9);
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    padding: 30px 40px;
+    text-align: center;
+  }
+  
+  h1 {
+    color: #0d47a1;
+    font-size: 28px;
+    margin-bottom: 5px;
+  }
+  
+  .subtitle {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 25px;
+  }
+  
+  .input-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  textarea {
+    width: 60%;
+    height: 80px;
+    font-size: 16px;
+    border: 2px solid #0d47a1;
+    border-radius: 10px;
+    padding: 10px;
+    outline: none;
+    resize: none;
+    transition: 0.3s;
+  }
+  
+  textarea:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 8px rgba(25,118,210,0.3);
+  }
+  
+  button {
+    background: #1976d2;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  button:hover {
+    background: #0d47a1;
+    transform: scale(1.05);
+  }
+  
+  .output {
+    margin-top: 20px;
+    text-align: left;
+    animation: fadeIn 0.5s ease;
+  }
+  
+  .success-box, .error-box, .loading {
+    background: #e3f2fd;
+    border-left: 5px solid #1976d2;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    animation: fadeIn 0.4s ease;
+  }
+  
+  .success-box {
+    border-left-color: #4caf50;
+    background: #e8f5e9;
+  }
+  
+  .error-box {
+    border-left-color: #d32f2f;
+    background: #ffebee;
+  }
+  
+  .loading {
+    border-left-color: #f9a825;
+    background: #fff8e1;
+    font-style: italic;
+  }
+  
+  .chain {
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .block {
+    background: #f9f9f9;
+    border: 2px solid #1976d2;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 10px;
+    width: 300px;
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  
+  .block:hover {
+    transform: scale(1.03);
+    background: #e3f2fd;
+  }
+  
+  .block h3 {
+    color: #0d47a1;
+    border-bottom: 1px solid #1976d2;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  

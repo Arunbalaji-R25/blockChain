@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blockchain Data Transmission Security</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🔒 Blockchain-Based Data Transmission Security</h1>
+    <p class="subtitle">Mini Project on Secure Data Transmission using Blockchain & RSA</p>
+
+    <div class="input-section">
+      <textarea id="dataInput" placeholder="Enter your message here..."></textarea>
+      <button id="sendBtn">Send Securely</button>
+    </div>
+
+    <div id="output" class="output"></div>
+
+    <h2>🧱 Blockchain Ledger</h2>
+    <div id="chainView" class="chain"></div>
+  </div>
+
+  <script>
+    const sendBtn = document.getElementById('sendBtn');
+    const dataInput = document.getElementById('dataInput');
+    const chainView = document.getElementById('chainView');
+    const outputDiv = document.getElementById('output');
+
+    async function fetchChain() {
+      const res = await fetch('/get_chain');
+      const chain = await res.json();
+      chainView.innerHTML = chain.map(b => `
+        <div class="block">
+          <h3>Block #${b.index}</h3>
+          <p><b>Timestamp:</b> ${b.timestamp}</p>
+          <p><b>Message:</b> ${b.data.message}</p>
+          <p><b>SHA256:</b> ${b.data.hash}</p>
+          <p><b>Signature:</b> ${b.data.signature.slice(0, 50)}...</p>
+          <p><b>Verified:</b> ${b.data.verified ? '✅ True' : '❌ False'}</p>
+          <p><b>Previous Hash:</b> ${b.previous_hash}</p>
+          <p><b>Block Hash:</b> ${b.hash}</p>
+        </div>
+      `).join('');
+    }
+
+    sendBtn.addEventListener('click', async () => {
+      const data = dataInput.value.trim();
+      if (!data) {
+        outputDiv.innerHTML = `<div class="error-box">⚠️ Please enter some data before sending!</div>`;
+        return;
+      }
+
+      outputDiv.innerHTML = `<div class="loading">⏳ Processing your data securely...</div>`;
+
+      const res = await fetch('/add_data', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({data})
+      });
+
+      const result = await res.json();
+
+      if (result.error) {
+        outputDiv.innerHTML = `<div class="error-box">❌ ${result.error}</div>`;
+        return;
+      }
+
+      const b = result.block;
+      outputDiv.innerHTML = `
+        <div class="success-box">
+          <h3>${result.message}</h3>
+          <p><b>Block #:</b> ${b.index}</p>
+          <p><b>Message:</b> ${b.data.message}</p>
+          <p><b>Hash:</b> ${b.data.hash}</p>
+          <p><b>Verification:</b> ${b.data.verified ? '✅ Valid Signature' : '❌ Invalid'}</p>
+        </div>
+      `;
+
+      dataInput.value = '';
+      fetchChain();
+    });
+
+    fetchChain();
+  </script>
+</body>
+</html>
